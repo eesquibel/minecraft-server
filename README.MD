@@ -2,25 +2,29 @@
 A simple, vanilla *Minecraft* server running in a docker container.
 
 ## Minimum
-`docker run --publish 25565:25565 minecraft-server`
+`docker run --detach --publish 25565:25565 jignate/minecraft-server`
+
+* `--detach` - Run container in background
+* `--publish 25565:25565` - Maps the host port (first number) to the container's port (second number)
+* `jignate/minecraft-server` - Server image hosted at Docker Hub
 
 ## With a container name
-`docker run --publish 25565:25565 --name my-server minecraft-server`
+`docker run --name my-server --detach --publish 25565:25565 jignate/minecraft-server`
 
 ## Persistent storage
-`docker run --volume /path/to/host/storage:/usr/share/minecraft/universe --publish 25565:25565 minecraft-server`
+`docker run --volume /path/to/host/storage:/usr/share/minecraft/universe --detach --publish 25565:25565 jignate/minecraft-server`
 
 ## Set World Name
-`docker run --env WORLD="My World" --publish 25565:25565 minecraft-server`
+`docker run --env WORLD="My World" --detach --publish 25565:25565 jignate/minecraft-server`
 
 ## Memory Options
-`docker run --env MEMORY_START="1G" --env MEMORY_START="2G" --publish 25565:25565 minecraft-server`
+`docker run --env MEMORY_START="1G" --env MEMORY_START="2G" --detach --publish 25565:25565 jignate/minecraft-server`
 
 ## Start with interactive server shell
-`docker run --interactive --tty --publish 25565:25565 minecraft-server`
+`docker run --interactive --tty --publish 25565:25565 jignate/minecraft-server`
 
 ## Attach to running minecraft server shell
-`docker attach container-name`
+`docker attach my-container-name`
 
 ## Additional Environment Variables
 * `UNIVERSE` - Minecraft universe directory on container (where world directories are stored)
