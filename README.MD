@@ -24,7 +24,14 @@ A simple, vanilla *Minecraft* server running in a docker container.
 `docker run --interactive --tty --publish 25565:25565 jignate/minecraft-server`
 
 ## Attach to running minecraft server shell
+Start with interactive, but also detach
+`docker run --detach --interactive --tty --publish 25565:25565 --name my-container-name jignate/minecraft-server`
+
+Re-attach to issue console commands
 `docker attach my-container-name`
+
+## Open shell in running container
+`docker exec --interactive --tty my-container-name /bin/sh`
 
 ## Additional Environment Variables
 * `UNIVERSE` - Minecraft universe directory on container (where world directories are stored)
