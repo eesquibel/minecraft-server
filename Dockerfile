@@ -1,6 +1,7 @@
 FROM alpine:latest
 
 RUN apk add --no-cache \
+    tini \
     openjdk11-jdk \
     ;
 
@@ -34,5 +35,7 @@ ENV EXTRA=${EXTRA}
 EXPOSE ${PORT}
 
 WORKDIR /usr/share/minecraft/
+
+ENTRYPOINT ["/sbin/tini", "--"]
 
 CMD ["/usr/share/minecraft/server.sh"]
