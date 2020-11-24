@@ -5,14 +5,12 @@ RUN apk add --no-cache \
     openjdk11-jdk \
     ;
 
-ADD https://launcher.mojang.com/v1/objects/35139deedbd5182953cf1caa23835da59ca3d7cd/server.jar /usr/share/minecraft/server.jar
+ADD https://papermc.io/api/v1/paper/1.16.4/288/download /usr/share/minecraft/server.jar
 ADD server.sh /usr/share/minecraft/
 
 RUN chmod +x /usr/share/minecraft/server.sh
 
 WORKDIR /usr/share/minecraft/
-
-RUN /usr/bin/java -jar server.jar --nogui --initSettings
 
 RUN echo "eula=true" > /usr/share/minecraft/eula.txt
 
@@ -23,7 +21,7 @@ ARG MEMORY_MAX=4G
 ARG PORT=25565
 ARG UNIVERSE=/usr/share/minecraft/universe
 ARG WORLD=world
-ARG EXTRA="--bonusChest"
+ARG EXTRA
 
 ENV JAVA_XMS="-Xms${MEMORY_START}"
 ENV JAVA_XMX="-Xmx${MEMORY_MAX}"

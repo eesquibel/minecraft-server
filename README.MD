@@ -1,31 +1,31 @@
-# Minecraft Server
-A simple, vanilla *Minecraft* server running in a docker container.
+# Paper Minecraft Server
+A simple, *Paper Minecraft* server running in a docker container.
 
 ## Minimum
-`docker run --detach --publish 25565:25565 jignate/minecraft-server`
+`docker run --detach --publish 25565:25565 jignate/minecraft-server:paper`
 
 * `--detach` - Run container in background
 * `--publish 25565:25565` - Maps the host port (first number) to the container's port (second number)
-* `jignate/minecraft-server` - Server image hosted at Docker Hub
+* `jignate/minecraft-server:paper` - Server image hosted at Docker Hub
 
 ## With a container name
-`docker run --name my-server --detach --publish 25565:25565 jignate/minecraft-server`
+`docker run --name my-server --detach --publish 25565:25565 jignate/minecraft-server:paper`
 
 ## Persistent storage
-`docker run --volume /path/to/host/storage:/usr/share/minecraft/universe --detach --publish 25565:25565 jignate/minecraft-server`
+`docker run --volume /path/to/host/storage:/usr/share/minecraft/universe --detach --publish 25565:25565 jignate/minecraft-server:paper`
 
 ## Set World Name
-`docker run --env WORLD="My World" --detach --publish 25565:25565 jignate/minecraft-server`
+`docker run --env WORLD="My World" --detach --publish 25565:25565 jignate/minecraft-server:paper`
 
 ## Memory Options
-`docker run --env MEMORY_START="1G" --env MEMORY_START="2G" --detach --publish 25565:25565 jignate/minecraft-server`
+`docker run --env MEMORY_START="1G" --env MEMORY_START="2G" --detach --publish 25565:25565 jignate/minecraft-server:paper`
 
 ## Start with interactive server shell
-`docker run --interactive --tty --publish 25565:25565 jignate/minecraft-server`
+`docker run --interactive --tty --publish 25565:25565 jignate/minecraft-server:paper`
 
 ## Attach to running minecraft server shell
 Start with interactive, but also detach
-`docker run --detach --interactive --tty --publish 25565:25565 --name my-container-name jignate/minecraft-server`
+`docker run --detach --interactive --tty --publish 25565:25565 --name my-container-name jignate/minecraft-server:paper`
 
 Re-attach to issue console commands
 `docker attach my-container-name`
