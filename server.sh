@@ -9,9 +9,9 @@ echo EXTRA=${EXTRA}
 
 cd /usr/share/minecraft/
 
-/usr/bin/java $JAVA_XMS $JAVA_XMX -jar /usr/share/minecraft/server.jar \
+exec /usr/bin/java $JAVA_XMS $JAVA_XMX -jar /usr/share/minecraft/server.jar \
     --nogui \
     --port ${PORT} \
     --universe "${UNIVERSE}" \
     --world "${WORLD}" \
-    {$EXTRA}
+    ${EXTRA}
