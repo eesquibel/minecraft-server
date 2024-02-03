@@ -2,10 +2,13 @@ FROM alpine:latest
 
 RUN apk add --no-cache \
     tini \
-    openjdk11-jdk \
+    openjdk17-jre-headless \
+	libudev-zero-dev \
     ;
 
-ADD https://launcher.mojang.com/v1/objects/35139deedbd5182953cf1caa23835da59ca3d7cd/server.jar /usr/share/minecraft/server.jar
+ARG SERVER_JAR_URL=https://piston-data.mojang.com/v1/objects/8dd1a28015f51b1803213892b50b7b4fc76e594d/server.jar
+
+ADD $SERVER_JAR_URL /usr/share/minecraft/server.jar
 ADD server.sh /usr/share/minecraft/
 
 RUN chmod +x /usr/share/minecraft/server.sh
