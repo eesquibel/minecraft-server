@@ -2,10 +2,16 @@ FROM alpine:latest
 
 RUN apk add --no-cache \
     tini \
-    openjdk11-jdk \
+    openjdk21-jre \
+    libudev-zero-dev \
+    su-exec \
     ;
 
-ADD https://papermc.io/api/v1/paper/1.16.4/288/download /usr/share/minecraft/server.jar
+ARG PAPER_JAR_URL=https://api.papermc.io/v2/projects/paper/versions/1.20.4/builds/408/downloads/paper-1.20.4-408.jar
+ARG MOJANG_JAR_URL=https://piston-data.mojang.com/v1/objects/8dd1a28015f51b1803213892b50b7b4fc76e594d/server.jar
+
+ADD $PAPER_JAR_URL /usr/share/minecraft/server.jar
+ADD $MOJANG_JAR_URL /usr/share/minecraft/cache/mojang_1.20.4.jar
 ADD server.sh /usr/share/minecraft/
 
 RUN chmod +x /usr/share/minecraft/server.sh
@@ -15,6 +21,11 @@ WORKDIR /usr/share/minecraft/
 RUN echo "eula=true" > /usr/share/minecraft/eula.txt
 
 VOLUME [ "/usr/share/minecraft/universe" ]
+
+RUN addgroup -S papermc && adduser -S papermc -G papermc
+
+RUN chmod -R ug+rw /usr/share/minecraft
+RUN chown -R papermc:papermc /usr/share/minecraft
 
 ARG MEMORY_START=2G
 ARG MEMORY_MAX=4G
