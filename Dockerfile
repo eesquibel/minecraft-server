@@ -2,8 +2,9 @@ FROM alpine:latest
 
 RUN apk add --no-cache \
     tini \
-    openjdk17-jre-headless \
+    openjdk17-jre \
 	libudev-zero-dev \
+    su-exec \
     ;
 
 ARG SERVER_JAR_URL=https://piston-data.mojang.com/v1/objects/8dd1a28015f51b1803213892b50b7b4fc76e594d/server.jar
@@ -20,6 +21,11 @@ RUN /usr/bin/java -jar server.jar --nogui --initSettings
 RUN echo "eula=true" > /usr/share/minecraft/eula.txt
 
 VOLUME [ "/usr/share/minecraft/universe" ]
+
+RUN addgroup -S minecraft && adduser -S minecraft -G minecraft
+
+RUN chmod -R ug+rw /usr/share/minecraft
+RUN chown -R minecraft:minecraft /usr/share/minecraft
 
 ARG MEMORY_START=2G
 ARG MEMORY_MAX=4G
